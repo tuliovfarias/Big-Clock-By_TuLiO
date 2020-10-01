@@ -1,0 +1,18 @@
+ESTRUTURA:
+
+- Fita de led - 58 leds
+- 2 Madeiras finas retangular -  1 com molde segmentos
+- Placa retangular isopor
+- Folhas de papel vegetal
+
+
+HARDWARE:
+
+- Esp 8622
+- conector usb
+- conector jack 9v
+- fio
+- placa
+- 1 barra conector
+- 1 cristal 
+-
