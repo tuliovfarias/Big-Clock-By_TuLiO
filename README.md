@@ -4,6 +4,7 @@
 
 - NodeMCU 1.0
 - Fita de led RGB PROGRAMÁVEL (58 leds)
+- 1 Push button
 - Caixa de madeira com a tampa segmentada
 - Placa de isopor de espessura 5 cm
 - Acrílico branco fosco
