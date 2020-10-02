@@ -106,8 +106,9 @@ void cronometro(void){
   
   //while(play_cronometro==-1){server.handleClient();}//espera apertar play ou zerar////////acrescentar depois
   if(play_cronometro==0){
-    ZeraCronometro();
-    minutos_cron=-1;
+    //segundos_cron=0;
+    minutos_cron=-1; // minutos_cron=0; //?
+    ZeraDisplays();
     while(play_cronometro==0){server.handleClient();if(func!=1)return;}//espera apertar play
     segundos_aux = timeClient.getSeconds();
   }
@@ -134,6 +135,28 @@ void cronometro(void){
   }
 }
 
+void timer(char timer_min){
+  server.handleClient();
+  while (minutos_timer<timer_min){
+    currentMillis = millis();//Tempo atual em ms
+    if (currentMillis - previousMillis > 500){
+      previousMillis = currentMillis;
+      ponto=!ponto;
+      MostrarPonto(ponto);
+      if(ponto){
+        segundos_timer = timeClient.getSeconds()-segundos_aux;
+        Serial.println(segundos_timer);
+        if(segundos_timer<0) segundos_timer=segundos_timer+60;
+        if(segundos_timer==0)minutos_timer++;
+        MostraTimer();
+      }
+    }
+  }
+  segundos_timer=0;
+  minutos_timer=0;
+  ZeraDisplays();
+}
+
 void MostraHoras(){
   MostrarAlgarismo(minutos%10,3); //mostra unidade de minutos
   MostrarAlgarismo(minutos/10,2); //mostra dezena de minutos
@@ -146,6 +169,13 @@ void MostraCronometro(void){
   MostrarAlgarismo(segundos_cron/10,2); //mostra dezena de segundos
   MostrarAlgarismo(minutos_cron%10,1);  //mostra unidade de minutos
   MostrarAlgarismo(minutos_cron/10,0);  //mostra dezenas de minutos
+}
+
+void MostraTimer(void){
+  MostrarAlgarismo(segundos_timer%10,3); //mostra unidade de segundos
+  MostrarAlgarismo(segundos_timer/10,2); //mostra dezena de segundos
+  MostrarAlgarismo(minutos_timer%10,1);  //mostra unidade de minutos
+  MostrarAlgarismo(minutos_timer/10,0);  //mostra dezenas de minutos
 }
 
 // Mostra um determinado numero no display (algarismo, posição do display)
@@ -196,7 +226,7 @@ void MostraData()
   leds[29] = ColorFromPalette(RGB_colors, index_color);
 }
 
-void ZeraCronometro(void){
+void ZeraDisplays(void){
   //zerar displays
   MostrarAlgarismo(0,3);
   MostrarAlgarismo(0,2);

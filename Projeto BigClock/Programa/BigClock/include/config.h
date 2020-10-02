@@ -40,12 +40,13 @@ void htmlIniciaCronometro();
 void htmlZeraCronometro();
 void relogio(void);
 void cronometro(void);
+void timer(char timer_min);
 void MostraHoras();
 void MostraCronometro(void);
 void MostrarAlgarismo(char alg,char disp);
 void MostrarPonto(bool on);
 void MostraData();
-void ZeraCronometro(void);
+void ZeraDisplays(void);
 void forceUpdate(void);
 void desl_display(char disp);
 void desl_displays(void);
@@ -69,6 +70,12 @@ int segundos_cron=0;
 unsigned int segundos_aux;
 unsigned int play_cronometro=0; //-1:nada, 0:zerar, 1:play, 2:pause
 unsigned int segundos_aux2=0;
+
+//Variáveis timer
+int minutos_timer=0;
+int segundos_timer=0;
+unsigned int play_timer=0; //-1:nada, 0:zerar, 1:play, 2:pause
+
 
 //Variáveis leds
 unsigned int x=0;
