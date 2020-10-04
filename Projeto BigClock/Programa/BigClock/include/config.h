@@ -9,9 +9,9 @@
 #include "FastLED.h"
 #include <Ticker.h>
 
-#define SSID_1      "2G TULIO (2)"
+#define SSID_1      "2G TULIO"
 #define PASS_1      "1234567890"
-#define SSID_2      "2G TULIO"
+#define SSID_2      "2G TULIO (2)"
 #define PASS_2      "1234567890"
 #define SSID_3      "2G TULIO"
 #define PASS_3      "1234567890"

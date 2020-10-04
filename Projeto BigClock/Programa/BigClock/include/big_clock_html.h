@@ -51,6 +51,10 @@ static const char TIMER_page[] PROGMEM = R"=====(
   </head>
   <hr>
   <h1>TIMER</h1><br>
+  <form action="/timer" target="hidden-form">
+    Ajuste: <input type="number" name="timer_min" min="0" max="99" value= %timer_min%>:<input type="number" name="timer_seg" min="0" max="59" value= %timer_seg%> 
+    <input type="submit" value="INICIAR">
+  </form><br>
   <p><a href="/cron/play"><button class="button">INICIAR</button></a></p><br>
   <p><a href="/cron/reset"><button class="button">ZERAR</button></a></p><br>
   <p><a href="/"><button class="button">VOLTAR</button></a></p><br>

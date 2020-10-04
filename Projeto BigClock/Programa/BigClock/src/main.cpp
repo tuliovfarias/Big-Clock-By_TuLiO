@@ -297,8 +297,9 @@ char HTTP_req[REQ_BUF_SZ] = {0}; // buffered HTTP request stored as null termina
 void htmlTimer2(){
   bool flag=0;
   String Stimer_min= String(timer_min);
+  String Stimer_seg= String(timer_seg);
   //Stimer_min += (char)timer_min;
-  server.sendContent("<!DOCTYPE html><html><style>.font {font-size: 100px;}</style><form class='font' action='/timer'><label class='font' for='minutos'>Minutos:</label><input class='font' type='text' name='minutos' value='"+Stimer_min+"'><br><br><input class='font' type='submit' value='Update'></form>");
+  server.sendContent("<!DOCTYPE html><html><style>.font {font-size: 100px;} </style><form class='font' action='/timer' target='hidden-form'><label class='font'>Ajuste:</label><input class='font' type='number' name='minutos' min='0' max='99' style='width: 2em;' value='"+Stimer_min+"'> : <input class='font' type='number' name='segundos' min='0' max='99' style='width: 2em;' value='"+Stimer_seg+"'><br><br><input class='font' type='submit' value='INICIAR'></form><br><br><a href='/'><button class='font'>VOLTAR</button></a><br>");
   for (int i = 0; i < server.args(); i++) { // Só entra se tiver argumentos
     flag=1; //Indica que apertou o botão Update.
     String server_argName = server.argName(i);
@@ -306,15 +307,14 @@ void htmlTimer2(){
       Stimer_min=server.arg("minutos");
       timer_min=Stimer_min.toInt();
     }
-    /*else if ((server_argName=="ip") & (server.arg("ip")!="")){
-      wifi_ip=server.arg("ip");
-      wifi_ip.toCharArray(WIFI_IP,20); // Necessário, pois a entrada da função EEPROM.put deve ter tamanho da saída do get.
-      EEPROM.put(20,WIFI_IP); EEPROM.commit(); //Armazena dados no flash
-    }*/
+    if ((server_argName=="segundos") & (server.arg("segundos")!="")){
+      Stimer_seg=server.arg("segundos");
+      timer_seg=Stimer_seg.toInt();
+    }
   }
   if(flag==1){
     func=2; 
-    server.sendContent("<meta http-equiv='refresh' content='0; URL=/timer' />"); // volta a pagina de monitoração em 0 s
+    server.sendContent("<meta http-equiv='refresh' content='0; URL=/timer' />"); 
     //html_monitor(); 
   }
 }
