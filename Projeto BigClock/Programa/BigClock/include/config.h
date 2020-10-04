@@ -37,6 +37,7 @@ CRGBPalette16 RGB_colors(CRGB::Red,CRGB::Blue,CRGB::Green,CRGB::White,CRGB::Red,
 void htmlRelogio();
 void htmlCronometro();
 void htmlTimer();
+void htmlTimer2();
 void htmlIniciaCronometro();
 void htmlZeraCronometro();
 void relogio(void);

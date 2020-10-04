@@ -77,8 +77,8 @@ void htmlCronometro(){
 }
 
 void htmlTimer(){ 
-  func=2;  
-  server.send(200, "text/html", TIMER_page); //Send web page
+  htmlTimer2();
+  //server.send(200, "text/html", TIMER_page); //Send web page
 }
 
 void htmlIniciaCronometro() {
@@ -262,5 +262,59 @@ void desl_displays(void){
       leds[i]= ColorFromPalette(RGB_colors, index_color);
       FastLED.show();
       delay(100);
+  }
+}
+
+#define REQ_BUF_SZ   60 // size of buffer used to capture HTTP requests
+char HTTP_req[REQ_BUF_SZ] = {0}; // buffered HTTP request stored as null terminated string
+
+/*boolean GetTime(byte *hr, byte *mn)
+{
+  boolean valid_time = false;  // hour and minute received flag
+  char *str_part;              // pointer to part of the HTTP_req string
+  char str_time[3] = {0};      // used to extract the times from HTTP_req string
+  
+  // get pointer to the beginning of hour data in string
+  str_part = strstr(HTTP_req, "&h=");
+  if (str_part != NULL) {
+    // get the hour from the string
+    str_time[0] = str_part[3];
+    str_time[1] = str_part[4];
+    *hr = atoi(str_time);
+    // get pointer to the beginning of minute data in string
+    str_part = strstr(HTTP_req, "&m=");
+    if (str_part != NULL) {
+      // get the minute from the string
+      str_time[0] = str_part[3];
+      str_time[1] = str_part[4];
+      *mn = atoi(str_time);
+      // got the hour and the minute
+      valid_time = true;
+    }
+  }
+}*/
+
+void htmlTimer2(){
+  bool flag=0;
+  String Stimer_min= String(timer_min);
+  //Stimer_min += (char)timer_min;
+  server.sendContent("<!DOCTYPE html><html><style>.font {font-size: 100px;}</style><form class='font' action='/timer'><label class='font' for='minutos'>Minutos:</label><input class='font' type='text' name='minutos' value='"+Stimer_min+"'><br><br><input class='font' type='submit' value='Update'></form>");
+  for (int i = 0; i < server.args(); i++) { // Só entra se tiver argumentos
+    flag=1; //Indica que apertou o botão Update.
+    String server_argName = server.argName(i);
+    if ((server_argName=="minutos") & (server.arg("minutos")!="")){
+      Stimer_min=server.arg("minutos");
+      timer_min=Stimer_min.toInt();
+    }
+    /*else if ((server_argName=="ip") & (server.arg("ip")!="")){
+      wifi_ip=server.arg("ip");
+      wifi_ip.toCharArray(WIFI_IP,20); // Necessário, pois a entrada da função EEPROM.put deve ter tamanho da saída do get.
+      EEPROM.put(20,WIFI_IP); EEPROM.commit(); //Armazena dados no flash
+    }*/
+  }
+  if(flag==1){
+    func=2; 
+    server.sendContent("<meta http-equiv='refresh' content='0; URL=/timer' />"); // volta a pagina de monitoração em 0 s
+    //html_monitor(); 
   }
 }
