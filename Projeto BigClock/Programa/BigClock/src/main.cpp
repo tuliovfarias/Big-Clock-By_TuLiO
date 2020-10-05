@@ -111,7 +111,7 @@ void relogio(void) {
   }
 }
 
-void cronometro(void){
+void cronometro(){
   server.handleClient();
   
   //while(play_cronometro==-1){server.handleClient();}//espera apertar play ou zerar////////acrescentar depois
@@ -148,7 +148,7 @@ void cronometro(void){
 void timer(){
   minutos_timer=timer_min; // minutos_cron=0; //?
   segundos_timer=timer_seg+1;
-  while (!(minutos_timer==0 & segundos_timer==0)){
+  while (!(minutos_timer==0 & segundos_timer==0) & func==2){
     server.handleClient();
     currentMillis = millis();//Tempo atual em ms
     if (currentMillis - previousMillis > 500){
@@ -165,7 +165,6 @@ void timer(){
   }
   segundos_timer=0;
   minutos_timer=0;
-  ZeraDisplays();
   while(func==2){server.handleClient();}
 }
 

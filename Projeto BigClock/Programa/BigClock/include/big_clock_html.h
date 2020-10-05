@@ -71,13 +71,16 @@ char TIMER_page2[] PROGMEM = R"=====(
     html {font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
     .button {background-color: blue; border: none; color: white; padding: 16px 40px; text-decoration: none; font-size: 40px; margin: 0px; cursor: pointer;}
     .button2 {background-color: #77878A;}
+    .font {font-size: 40px}
   </style>
 </head>
-<body>
+<body><hr>
+    <h1>TIMER</h1><br>
     <form action=/timer method="post">
-        Ajuste: <input type="number" id="timer_min" name="timer_min" min="0" max="99" value="">:<input type="number" id="timer_seg" name="timer_seg" min="0" max="59" value="">
-        <input type="submit" value="INICIAR">
+        <p class="font">Ajuste: <input class="font" type="number" id="timer_min" name="timer_min" min="0" max="99" style="width: 80px;" value="">:<input class="font" type="number" id="timer_seg" name="timer_seg" min="0" max="59" style="width: 80px;" value=""></p>
+        <br><input class="button" type="submit" value="INICIAR">
     </form>
-</body>
+    <br><p><a href="/"><button class="button">VOLTAR</button></a></p><br>
+<hr></body>
 </html>
 )=====";
