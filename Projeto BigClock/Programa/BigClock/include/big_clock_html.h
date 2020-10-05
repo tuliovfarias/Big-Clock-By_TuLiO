@@ -61,3 +61,23 @@ static const char TIMER_page[] PROGMEM = R"=====(
   <hr>
 </html>
 )=====";
+
+char TIMER_page2[] PROGMEM = R"=====(
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <style>
+    html {font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
+    .button {background-color: blue; border: none; color: white; padding: 16px 40px; text-decoration: none; font-size: 40px; margin: 0px; cursor: pointer;}
+    .button2 {background-color: #77878A;}
+  </style>
+</head>
+<body>
+    <form action=/timer method="post">
+        Ajuste: <input type="number" id="timer_min" name="timer_min" min="0" max="99" value="">:<input type="number" id="timer_seg" name="timer_seg" min="0" max="59" value="">
+        <input type="submit" value="INICIAR">
+    </form>
+</body>
+</html>
+)=====";

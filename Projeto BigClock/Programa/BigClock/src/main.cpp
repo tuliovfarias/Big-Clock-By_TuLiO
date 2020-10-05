@@ -77,8 +77,10 @@ void htmlCronometro(){
 }
 
 void htmlTimer(){ 
-  htmlTimer2();
-  //server.send(200, "text/html", TIMER_page); //Send web page
+  server.send(200, "text/html", TIMER_page2); //Send web page
+  timer_min= server.arg("timer_min").toInt();
+  timer_seg= server.arg("timer_seg").toInt();
+  if (server.args())func=2; //Caso tenha argumentos, inicia timer
 }
 
 void htmlIniciaCronometro() {
@@ -262,59 +264,5 @@ void desl_displays(void){
       leds[i]= ColorFromPalette(RGB_colors, index_color);
       FastLED.show();
       delay(100);
-  }
-}
-
-#define REQ_BUF_SZ   60 // size of buffer used to capture HTTP requests
-char HTTP_req[REQ_BUF_SZ] = {0}; // buffered HTTP request stored as null terminated string
-
-/*boolean GetTime(byte *hr, byte *mn)
-{
-  boolean valid_time = false;  // hour and minute received flag
-  char *str_part;              // pointer to part of the HTTP_req string
-  char str_time[3] = {0};      // used to extract the times from HTTP_req string
-  
-  // get pointer to the beginning of hour data in string
-  str_part = strstr(HTTP_req, "&h=");
-  if (str_part != NULL) {
-    // get the hour from the string
-    str_time[0] = str_part[3];
-    str_time[1] = str_part[4];
-    *hr = atoi(str_time);
-    // get pointer to the beginning of minute data in string
-    str_part = strstr(HTTP_req, "&m=");
-    if (str_part != NULL) {
-      // get the minute from the string
-      str_time[0] = str_part[3];
-      str_time[1] = str_part[4];
-      *mn = atoi(str_time);
-      // got the hour and the minute
-      valid_time = true;
-    }
-  }
-}*/
-
-void htmlTimer2(){
-  bool flag=0;
-  String Stimer_min= String(timer_min);
-  String Stimer_seg= String(timer_seg);
-  //Stimer_min += (char)timer_min;
-  server.sendContent("<!DOCTYPE html><html><style>.font {font-size: 100px;} </style><form class='font' action='/timer' target='hidden-form'><label class='font'>Ajuste:</label><input class='font' type='number' name='minutos' min='0' max='99' style='width: 2em;' value='"+Stimer_min+"'> : <input class='font' type='number' name='segundos' min='0' max='99' style='width: 2em;' value='"+Stimer_seg+"'><br><br><input class='font' type='submit' value='INICIAR'></form><br><br><a href='/'><button class='font'>VOLTAR</button></a><br>");
-  for (int i = 0; i < server.args(); i++) { // Só entra se tiver argumentos
-    flag=1; //Indica que apertou o botão Update.
-    String server_argName = server.argName(i);
-    if ((server_argName=="minutos") & (server.arg("minutos")!="")){
-      Stimer_min=server.arg("minutos");
-      timer_min=Stimer_min.toInt();
-    }
-    if ((server_argName=="segundos") & (server.arg("segundos")!="")){
-      Stimer_seg=server.arg("segundos");
-      timer_seg=Stimer_seg.toInt();
-    }
-  }
-  if(flag==1){
-    func=2; 
-    server.sendContent("<meta http-equiv='refresh' content='0; URL=/timer' />"); 
-    //html_monitor(); 
   }
 }

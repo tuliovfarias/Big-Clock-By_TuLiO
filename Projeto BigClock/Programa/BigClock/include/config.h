@@ -38,6 +38,7 @@ void htmlRelogio();
 void htmlCronometro();
 void htmlTimer();
 void htmlTimer2();
+void htmlTimerPlay();
 void htmlIniciaCronometro();
 void htmlZeraCronometro();
 void relogio(void);
