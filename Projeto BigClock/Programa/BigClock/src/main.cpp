@@ -42,6 +42,7 @@ void setup() {
   server.on("/cron", htmlCronometro);
   server.on("/cron/play", htmlIniciaCronometro); 
   server.on("/cron/reset", htmlZeraCronometro);
+  server.on("/timer", htmlTimer);
   server.begin();                  //Start server
 }
 
@@ -57,6 +58,8 @@ void loop() {
     case 1:
       cronometro();
       break;
+    case 2:
+      timer();
   }
 }
 
@@ -65,24 +68,29 @@ void loop() {
 ///////////////////////////////////////////////////////////////////////////
 void htmlRelogio(){
   func=0;  
-  server.send(200, "text/html", RELOGIO_page); //Send web page
+  server.send(200, "text/html", RELOGIO_page);
 }
 
 void htmlCronometro(){ 
   func=1;  
-  server.send(200, "text/html", CRONOMETRO_page); //Send web page
+  server.send(200, "text/html", CRONOMETRO_page);
+}
+
+void htmlTimer(){ 
+  server.send(200, "text/html", TIMER_page); 
+  timer_min= server.arg("timer_min").toInt();
+  timer_seg= server.arg("timer_seg").toInt();
+  if (server.args())func=2; //Caso tenha argumentos, inicia timer
 }
 
 void htmlIniciaCronometro() {
   if(play_cronometro==2||play_cronometro==0)play_cronometro=1;
   else play_cronometro=2;
-  server.send(200, "text/html", CRONOMETRO_page); //Send web page
-  //server.send(200, "text/plain", "INICIOU OU PAUSOUUUU"); //Send ADC value only to client ajax request
+  server.send(200, "text/html", CRONOMETRO_page);
 }
 void htmlZeraCronometro() {
   play_cronometro=0;
   server.send(200, "text/html", CRONOMETRO_page); //Send web page
-  //server.send(200, "text/plain", "ZEROUUUUU"); //Send ADC value only to client ajax request
 }
 
 void relogio(void) {
@@ -101,15 +109,15 @@ void relogio(void) {
   }
 }
 
-void cronometro(void){
+void cronometro(){
   server.handleClient();
-  
   //while(play_cronometro==-1){server.handleClient();}//espera apertar play ou zerar////////acrescentar depois
   if(play_cronometro==0){
-    ZeraCronometro();
-    minutos_cron=-1;
+    minutos_cron=0; // minutos_cron=-1; // pra começar com 0
+    ZeraDisplays();
     while(play_cronometro==0){server.handleClient();if(func!=1)return;}//espera apertar play
     segundos_aux = timeClient.getSeconds();
+    minutos_aux=timeClient.getMinutes();
   }
   currentMillis = millis();//Tempo atual em ms
   if (currentMillis - previousMillis > 500){
@@ -118,9 +126,10 @@ void cronometro(void){
     MostrarPonto(ponto);
     if(ponto){
       segundos_cron = timeClient.getSeconds()-segundos_aux;
-      Serial.println(segundos_cron);
-      if(segundos_cron<0) segundos_cron=segundos_cron+60;
-      if(segundos_cron==0)minutos_cron++;
+      minutos_aux = timeClient.getMinutes()-minutos_aux;
+      if(segundos_cron<0) segundos_cron=segundos_cron+60; //Evitar segundo negativo
+      if(segundos_cron==0 & flag_cron==1)minutos_cron++;
+      if(segundos_cron==59)flag_cron=1; else flag_cron=0; //flag para não incrementar minutos em 00:00
       MostraCronometro();
     }
   }
@@ -130,8 +139,30 @@ void cronometro(void){
     while(play_cronometro==2){server.handleClient();if(func!=1)return;} //se pausar, espera retomar ou zerar
     if(segundos_cron<0)segundos_cron=segundos_cron-60;
     segundos_aux=timeClient.getSeconds()-segundos_cron; //necessário para retomar onde parou
-    //if(segundos_aux2<0) segundos_aux2=segundos_aux2+60;
   }
+}
+
+void timer(){
+  minutos_timer=timer_min; // minutos_cron=0; //?
+  segundos_timer=timer_seg+1;
+  while (!(minutos_timer==0 & segundos_timer==0) & func==2){
+    server.handleClient();
+    currentMillis = millis();//Tempo atual em ms
+    if (currentMillis - previousMillis > 500){
+      previousMillis = currentMillis;
+      ponto=!ponto;
+      MostrarPonto(ponto);
+      if(ponto){
+        if(segundos_timer==0)minutos_timer--;
+        segundos_timer--;
+        if(segundos_timer<0) segundos_timer=59;
+        MostraTimer();
+      }
+    }
+  }
+  segundos_timer=0;
+  minutos_timer=0;
+  while(func==2){server.handleClient();}
 }
 
 void MostraHoras(){
@@ -141,11 +172,18 @@ void MostraHoras(){
   MostrarAlgarismo(horas/10,0);  //mostra dezenas de horas
 }
 
-void MostraCronometro(void){
+void MostraCronometro(){
   MostrarAlgarismo(segundos_cron%10,3); //mostra unidade de segundos
   MostrarAlgarismo(segundos_cron/10,2); //mostra dezena de segundos
   MostrarAlgarismo(minutos_cron%10,1);  //mostra unidade de minutos
   MostrarAlgarismo(minutos_cron/10,0);  //mostra dezenas de minutos
+}
+
+void MostraTimer(){
+  MostrarAlgarismo(segundos_timer%10,3); //mostra unidade de segundos
+  MostrarAlgarismo(segundos_timer/10,2); //mostra dezena de segundos
+  MostrarAlgarismo(minutos_timer%10,1);  //mostra unidade de minutos
+  MostrarAlgarismo(minutos_timer/10,0);  //mostra dezenas de minutos
 }
 
 // Mostra um determinado numero no display (algarismo, posição do display)
@@ -196,7 +234,7 @@ void MostraData()
   leds[29] = ColorFromPalette(RGB_colors, index_color);
 }
 
-void ZeraCronometro(void){
+void ZeraDisplays(void){
   //zerar displays
   MostrarAlgarismo(0,3);
   MostrarAlgarismo(0,2);

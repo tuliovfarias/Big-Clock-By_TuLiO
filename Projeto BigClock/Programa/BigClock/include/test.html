@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+<body>
+
+<p> LED Status: ,<form id="led-state" action="/ledstate">
+    <input type="text">
+</form action=""></p>
+<button onclick="myFunction()"> TOGGLE </button>
+</body>
+<script>
+function myFunction()
+{
+  console.log("button was clicked!");
+  var xhr = new XMLHttpRequest();
+  var url = "/ledstate";
+  xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("led-state").innerHTML = this.responseText;
+    }
+  };
+  xhr.open("GET", url, true);
+  xhr.send();
+};
+document.addEventListener('DOMContentLoaded', myFunction, false);
+</script>
+</html>
+
+
+<body>
+    <form>
+        Ajuste: <input type="number" id="timer_min" name="timer_min" min="0" max="99" value="">:<input type="number" id="timer_seg" name="timer_seg" min="0" max="59" value="">
+        <input type="submit" onclick="myFunction()" value="INICIAR S">
+        <button onclick="myFunction()"> INICIAR </button>
+    </form>
+    Ajuste: <input type="number" id="timer_min" name="timer_min" min="0" max="99" value="">:<input type="number" id="timer_seg" name="timer_seg" min="0" max="59" value=""> 
+    
+  </body>
