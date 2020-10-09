@@ -111,13 +111,10 @@ void relogio(void) {
 
 void cronometro(){
   server.handleClient();
-  //while(play_cronometro==-1){server.handleClient();}//espera apertar play ou zerar////////acrescentar depois
   if(play_cronometro==0){
-    minutos_cron=0; // minutos_cron=-1; // pra começar com 0
     ZeraDisplays();
     while(play_cronometro==0){server.handleClient();if(func!=1)return;}//espera apertar play
-    segundos_aux = timeClient.getSeconds();
-    minutos_aux=timeClient.getMinutes();
+    unix_aux=timeClient.getEpochTime();
   }
   currentMillis = millis();//Tempo atual em ms
   if (currentMillis - previousMillis > 500){
@@ -125,25 +122,29 @@ void cronometro(){
     ponto=!ponto;
     MostrarPonto(ponto);
     if(ponto){
-      segundos_cron = timeClient.getSeconds()-segundos_aux;
-      minutos_aux = timeClient.getMinutes()-minutos_aux;
-      if(segundos_cron<0) segundos_cron=segundos_cron+60; //Evitar segundo negativo
-      if(segundos_cron==0 & flag_cron==1)minutos_cron++;
-      if(segundos_cron==59)flag_cron=1; else flag_cron=0; //flag para não incrementar minutos em 00:00
+      segundos_cron = (timeClient.getEpochTime()-unix_aux)%60;
+      minutos_cron = (timeClient.getEpochTime()-unix_aux)/60;
       MostraCronometro();
     }
   }
   if(play_cronometro==2){
     MostrarPonto(1);
     MostraCronometro(); //para o caso de voltar da func relógio
-    while(play_cronometro==2){server.handleClient();if(func!=1)return;} //se pausar, espera retomar ou zerar
-    if(segundos_cron<0)segundos_cron=segundos_cron-60;
-    segundos_aux=timeClient.getSeconds()-segundos_cron; //necessário para retomar onde parou
+    if(flag_cron==0)aux_cron=timeClient.getEpochTime();
+    while(play_cronometro==2){ //se pausar, espera retomar ou zerar
+      server.handleClient();
+      if(func!=1){
+        flag_cron=1;
+        return;
+      }
+    }
+    unix_aux+=timeClient.getEpochTime()-aux_cron; 
+    flag_cron=0;
   }
 }
 
 void timer(){
-  minutos_timer=timer_min; // minutos_cron=0; //?
+  minutos_timer=timer_min;
   segundos_timer=timer_seg+1;
   while (!(minutos_timer==0 & segundos_timer==0) & func==2){
     server.handleClient();

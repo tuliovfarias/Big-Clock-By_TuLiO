@@ -73,6 +73,7 @@ unsigned int segundos_aux;
 unsigned int minutos_aux=0;
 unsigned int play_cronometro=0; //-1:nada, 0:zerar, 1:play, 2:pause
 bool flag_cron=0; //flag para não incrementar minutos em 00:00
+unsigned long int aux_cron,unix_aux;
 
 //Variáveis timer
 int timer_min=1; // tempo do timer em minutos
