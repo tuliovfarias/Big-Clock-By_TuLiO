@@ -36,17 +36,12 @@ CRGBPalette16 RGB_colors(CRGB::Red,CRGB::Blue,CRGB::Green,CRGB::White,CRGB::Red,
 /////////////////////////////////////////////////////////
 void htmlRelogio();
 void htmlCronometro();
-void htmlTimer();
-void htmlTimer2();
-void htmlTimerPlay();
 void htmlIniciaCronometro();
 void htmlZeraCronometro();
 void relogio(void);
 void cronometro(void);
-void timer();
 void MostraHoras();
 void MostraCronometro(void);
-void MostraTimer(void);
 void MostrarAlgarismo(char alg,char disp);
 void MostrarPonto(bool on);
 void MostraData();
@@ -59,7 +54,7 @@ void desl_displays(void);
 //Variáveis Globais
 ///////////////////////////////////////////////////////////////////////////////////
 //Variáveis gerais
-char func=0; //função - 0:relógio, 1:cronômetro, 2:timer
+char func=0; //função - 0:relógio, 1:cronômetro
 
 //Variáveis relógio
 int segundos,minutos,horas,diadasemana,diadomes,mes,ano;
@@ -74,14 +69,6 @@ unsigned int minutos_aux=0;
 unsigned int play_cronometro=0; //-1:nada, 0:zerar, 1:play, 2:pause
 bool flag_cron=0; //flag para não incrementar minutos em 00:00
 unsigned long int aux_cron,unix_aux;
-
-//Variáveis timer
-int timer_min=1; // tempo do timer em minutos
-int timer_seg=0;
-int minutos_timer=0;
-int segundos_timer=0;
-unsigned int play_timer=0; //-1:nada, 0:zerar, 1:play, 2:pause
-
 
 //Variáveis leds
 char index_color=16*COR_LED; //define a cor dos leds
