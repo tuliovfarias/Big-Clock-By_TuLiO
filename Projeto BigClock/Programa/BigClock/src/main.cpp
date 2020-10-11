@@ -120,7 +120,7 @@ void cronometro(){
   if(play_cronometro==2){
     MostrarPonto(1);
     MostraCronometro(); //para o caso de voltar da func relógio
-    if(flag_cron==0)aux_cron=timeClient.getEpochTime();
+    if(flag_cron==0)aux_cron=timeClient.getEpochTime(); //salva referência pra retomar depois
     while(play_cronometro==2){ //se pausar, espera retomar ou zerar
       server.handleClient();
       if(func!=1){
@@ -128,7 +128,7 @@ void cronometro(){
         return;
       }
     }
-    unix_aux+=timeClient.getEpochTime()-aux_cron; 
+    unix_aux+=timeClient.getEpochTime()-aux_cron; //referência pra retomar onde parou
     flag_cron=0;
   }
 }
