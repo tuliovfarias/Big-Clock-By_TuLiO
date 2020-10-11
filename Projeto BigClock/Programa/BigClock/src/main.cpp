@@ -1,3 +1,5 @@
+//******* v.1.0 By TuLiO *******//
+
 #include <Arduino.h>
 #include "config.h"
 #include "big_clock_html.h"
