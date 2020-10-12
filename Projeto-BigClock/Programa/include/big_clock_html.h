@@ -12,6 +12,7 @@ static const char RELOGIO_page[] PROGMEM = R"=====(
   <hr>
   <h1>BIG CLOCK v1.0 by TuLiO</h1><br>
   <p><a href="/cron"><button class="button">CRONOMETRO</button></a></p>
+  <p><a href="/timer"><button class="button">TIMER</button></a></p>
   <hr>
 </html>
 )=====";
@@ -50,7 +51,7 @@ char TIMER_page[] PROGMEM = R"=====(
 </head>
 <body><hr>
     <h1>TIMER</h1><br>
-    <form action=/timer method="post">
+    <form action=/timer/play method="post">
         <p class="font"><input class="font" type="number" id="timer_min" name="timer_min" min="0" max="99" style="width: 80px;" value="">:<input class="font" type="number" id="timer_seg" name="timer_seg" min="0" max="59" style="width: 80px;" value=""></p>
         <p class="font">min:seg</p>
         <br><input class="button" type="submit" value="INICIAR">

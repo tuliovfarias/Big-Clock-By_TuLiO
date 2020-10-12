@@ -33,7 +33,7 @@ void setup() {
   Serial.println("Connecting Wifi...");
   while (wifiMulti.run() != WL_CONNECTED) {
     delay(200);
-  }>
+  }
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
@@ -60,6 +60,8 @@ void loop() {
     case 1:
       cronometro();
       break;
+    case 2:
+      timer();
   }
 }
 
