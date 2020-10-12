@@ -1,6 +1,7 @@
 # Big-clock (Relógio de parede Wifi)
 
 Relógio que utiliza protocolo NTP com função cronômetro controlada por Wifi.
+Pretendo adicionar mais funções como timer (em andamento).
  
 **HARDWARE E MATERIAIS USADOS:**
 
