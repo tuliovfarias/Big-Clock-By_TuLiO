@@ -14,7 +14,9 @@ Pretendo adicionar mais funções como timer (em andamento).
 - Cabo usb
 - Fios de cabo de rede
 
-**LINKS ÚTEIS**
+**LINKS ÚTEIS:**
 - https://www.instructables.com/id/Big-auto-dim-room-clock-using-arduino-and-WS2811/
 - https://circuits4you.com/2016/12/16/esp8266-web-server-html/
 - HTML ONLINE: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_styles_background-color
+
+**Obs:** Projeto realizado no VS Code com a extensão PlatformIO.
