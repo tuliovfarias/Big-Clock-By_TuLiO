@@ -92,7 +92,7 @@ void htmlTimer(){
   server.send(200, "text/html", TIMER_page); 
   timer_min= server.arg("timer_min").toInt();
   timer_seg= server.arg("timer_seg").toInt();
-  if (server.args())func=2; //Caso tenha argumentos, inicia timer
+  if (server.args())func=2; //Caso tenha argumentos (tempo do timer), inicia timer
 }
 
 void relogio(void) {

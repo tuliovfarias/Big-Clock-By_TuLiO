@@ -51,7 +51,7 @@ char TIMER_page[] PROGMEM = R"=====(
 </head>
 <body><hr>
     <h1>TIMER</h1><br>
-    <form action=/timer/play method="post">
+    <form action=/timer method="post">
         <p class="font"><input class="font" type="number" id="timer_min" name="timer_min" min="0" max="99" style="width: 80px;" value="">:<input class="font" type="number" id="timer_seg" name="timer_seg" min="0" max="59" style="width: 80px;" value=""></p>
         <p class="font">min:seg</p>
         <br><input class="button" type="submit" value="INICIAR">
