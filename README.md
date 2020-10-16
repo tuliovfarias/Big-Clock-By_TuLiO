@@ -20,5 +20,5 @@ Pretendo adicionar mais funções como timer (em andamento).
 - HTML ONLINE: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_styles_background-color
 
 **Obs:** 
-Projeto realizado no VS Code com a extensão PlatformIO.
-Usei push button para reiniciar o ESP, mas é opcional.
+- Projeto realizado no VS Code com a extensão PlatformIO.
+- Usei push button para reiniciar o ESP, mas é opcional.
