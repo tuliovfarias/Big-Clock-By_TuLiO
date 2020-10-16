@@ -5,7 +5,7 @@ Pretendo adicionar mais funções como timer (em andamento).
  
 **HARDWARE E MATERIAIS USADOS:**
 
-- NodeMCU 1.0
+- NodeMCU 1.0 (módulo com ESP-8266)
 - Fita de led RGB PROGRAMÁVEL (58 leds)
 - 1 Push button
 - Caixa de madeira com a tampa segmentada
@@ -19,4 +19,6 @@ Pretendo adicionar mais funções como timer (em andamento).
 - https://circuits4you.com/2016/12/16/esp8266-web-server-html/
 - HTML ONLINE: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_styles_background-color
 
-**Obs:** Projeto realizado no VS Code com a extensão PlatformIO.
+**Obs:** 
+Projeto realizado no VS Code com a extensão PlatformIO.
+Usei push button para reiniciar o ESP, mas é opcional.
