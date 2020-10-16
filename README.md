@@ -23,4 +23,4 @@ Pretendo adicionar mais funções como timer (em andamento).
 - Projeto realizado no VS Code com a extensão PlatformIO.
 - Usei push button para reiniciar o ESP, mas é opcional.
 - Dá pra fazer sem isopor e acrílico, com os leds expostos, mas não fica tão bonito.
-- A madeira que utilizei é uma bem fininha que molda à laser.
+- A madeira que utilizei é uma bem fininha, que molda à laser.
