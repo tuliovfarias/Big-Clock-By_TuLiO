@@ -20,7 +20,7 @@ Pretendo adicionar mais funções como timer (em andamento).
 - HTML ONLINE: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_styles_background-color
 
 **Obs:** 
-- Projeto realizado no VS Code com a extensão PlatformIO.
+- Projeto realizado no VS Code com a extensão PlatformIO. Abrir a pasta Projeto-Big-Clock pelo "Open project" do PIO Home.
 - Usei push button para reiniciar o ESP, mas é opcional.
 - Dá pra fazer sem isopor e acrílico, com os leds expostos, mas não fica tão bonito.
 - A madeira que utilizei é uma bem fininha, que molda à laser.
