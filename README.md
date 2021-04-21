@@ -17,13 +17,17 @@ Video demonstrativo: https://youtu.be/cCIw3eaZ73o
 - Cabo usb
 - Fios de cabo de rede
 
+**BIBLIOTECAS:**
+- FastLED - https://github.com/FastLED/FastLED
+- NTPClient - https://github.com/arduino-libraries/NTPClient
+
 **LINKS ÚTEIS:**
 - https://www.instructables.com/id/Big-auto-dim-room-clock-using-arduino-and-WS2811/
 - https://circuits4you.com/2016/12/16/esp8266-web-server-html/
 - HTML ONLINE: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_styles_background-color
 
 **Obs:** 
-- Projeto realizado no VS Code com a extensão PlatformIO. Abrir a pasta Projeto-Big-Clock pelo "Open project" do PIO Home.
+- Projeto realizado no VS Code com a extensão PlatformIO.
 - Usei push button para reiniciar o ESP, mas é opcional.
 - Dá pra fazer sem isopor e acrílico, com os leds expostos, mas não fica tão bonito.
 - A madeira que utilizei é uma bem fininha, que molda à laser.
