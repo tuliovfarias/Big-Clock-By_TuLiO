@@ -10,7 +10,7 @@ static const char RELOGIO_page[] PROGMEM = R"=====(
     </style>
   </head>
   <hr>
-  <h1>BIG CLOCK v1.0 by TuLiO</h1><br>
+  <h1>BIG CLOCK v1.1 by TuLiO</h1><br>
   <p><a href="/cron"><button class="button">CRONOMETRO</button></a></p>
   <p><a href="/timer"><button class="button">TIMER</button></a></p>
   <hr>
