@@ -44,6 +44,7 @@ void setup() {
   server.on("/cron", htmlCronometro);
   server.on("/cron/play", htmlIniciaCronometro); 
   server.on("/cron/reset", htmlZeraCronometro);
+  server.on("/timer", htmlTimer);
   server.begin();                  //Start server
 }
 
@@ -59,6 +60,8 @@ void loop() {
     case 1:
       cronometro();
       break;
+    case 2:
+      timer();
   }
 }
 
@@ -83,6 +86,13 @@ void htmlIniciaCronometro() {
 void htmlZeraCronometro() {
   play_cronometro=0;
   server.send(200, "text/html", CRONOMETRO_page); //Send web page
+}
+
+void htmlTimer(){ 
+  server.send(200, "text/html", TIMER_page); 
+  timer_min= server.arg("timer_min").toInt();
+  timer_seg= server.arg("timer_seg").toInt();
+  if (server.args())func=2; //Caso tenha argumentos (tempo do timer), inicia timer
 }
 
 void relogio(void) {
@@ -135,6 +145,29 @@ void cronometro(){
   }
 }
 
+void timer(){
+  minutos_timer=timer_min; // minutos_cron=0; //?
+  segundos_timer=timer_seg+1;
+  while (!(minutos_timer==0 & segundos_timer==0) & func==2){
+    server.handleClient();
+    currentMillis = millis();//Tempo atual em ms
+    if (currentMillis - previousMillis > 500){
+      previousMillis = currentMillis;
+      ponto=!ponto;
+      MostrarPonto(ponto);
+      if(ponto){
+        if(segundos_timer==0)minutos_timer--;
+        segundos_timer--;
+        if(segundos_timer<0) segundos_timer=59;
+        MostraTimer();
+      }
+    }
+  }
+  segundos_timer=0;
+  minutos_timer=0;
+  while(func==2){server.handleClient();}
+}
+
 void MostraHoras(){
   MostrarAlgarismo(minutos%10,3); //mostra unidade de minutos
   MostrarAlgarismo(minutos/10,2); //mostra dezena de minutos
@@ -147,6 +180,13 @@ void MostraCronometro(){
   MostrarAlgarismo(segundos_cron/10,2); //mostra dezena de segundos
   MostrarAlgarismo(minutos_cron%10,1);  //mostra unidade de minutos
   MostrarAlgarismo(minutos_cron/10,0);  //mostra dezenas de minutos
+}
+
+void MostraTimer(){
+  MostrarAlgarismo(segundos_timer%10,3); //mostra unidade de segundos
+  MostrarAlgarismo(segundos_timer/10,2); //mostra dezena de segundos
+  MostrarAlgarismo(minutos_timer%10,1);  //mostra unidade de minutos
+  MostrarAlgarismo(minutos_timer/10,0);  //mostra dezenas de minutos
 }
 
 // Mostra um determinado numero no display (algarismo, posição do display)
