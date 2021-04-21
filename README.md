@@ -4,7 +4,7 @@ Relógio Wi-Fi que utiliza protocolo NTP para atualizar as horas. Funções atua
 
 <img src="/Foto.png"/>
  
-**HARDWARE E MATERIAIS USADOS:**
+**HARDWARE E MATERIAIS UTILIZADOS:**
 
 - NodeMCU 1.0 (módulo com ESP-8266)
 - Fita de led RGB PROGRAMÁVEL (58 leds)
