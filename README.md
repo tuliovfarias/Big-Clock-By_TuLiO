@@ -9,7 +9,7 @@ Video demonstrativo: https://youtu.be/cCIw3eaZ73o
 **HARDWARE E MATERIAIS UTILIZADOS:**
 
 - NodeMCU 1.0 (módulo com ESP-8266)
-- Fita de led RGB PROGRAMÁVEL (58 leds)
+- Fita de led RGB PROGRAMÁVEL (58 leds - 2/segmento)
 - 1 Push button
 - Caixa de madeira com a tampa segmentada
 - Placa de isopor de espessura 5 cm
