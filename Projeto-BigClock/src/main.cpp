@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include "config.h"
-#include "big_clock_html.h"
+#include "big_clock.html"
 
 /*//Interrupt timer
 void onTimerISR(){
@@ -28,7 +28,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   wifiMulti.addAP(SSID_1, PASS_1);
   wifiMulti.addAP(SSID_2, PASS_2);
-  wifiMulti.addAP(SSID_3, PASS_3);
+  //wifiMulti.addAP(SSID_3, PASS_3);
 
   Serial.println("Connecting Wifi...");
   while (wifiMulti.run() != WL_CONNECTED) {
