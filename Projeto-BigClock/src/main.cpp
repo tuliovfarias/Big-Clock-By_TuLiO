@@ -1,4 +1,9 @@
-//******* v.1.0 By TuLiO *******//
+/********** Big Clock v.1.1 *************
+
+Autor: Túlio Farias
+https://github.com/tuliovfarias/Big-Clock
+
+****************************************/
 
 #include <Arduino.h>
 #include "config.h"
@@ -18,7 +23,7 @@ void onTimerISR(){
 //Setup
 ///////////////////////////////////////////////////////////////////////////
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.clear();
   FastLED.setBrightness(brilho);
@@ -26,15 +31,18 @@ void setup() {
   FastLED.show();
   
   WiFi.mode(WIFI_STA);
+  if (!WiFi.config(local_IP, gateway, subnet, dns)) { //WiFi.config(ip, gateway, subnet, dns1, dns2);
+    Serial.println("WiFi config error");
+  } 
   wifiMulti.addAP(SSID_1, PASS_1);
   wifiMulti.addAP(SSID_2, PASS_2);
-  //wifiMulti.addAP(SSID_3, PASS_3);
 
   Serial.println("Connecting Wifi...");
   while (wifiMulti.run() != WL_CONNECTED) {
     delay(200);
   }
-  Serial.println("WiFi connected");
+  
+  Serial.println("WiFi connected to "+WiFi.SSID());
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   timeClient.begin();
@@ -148,7 +156,7 @@ void cronometro(){
 void timer(){
   minutos_timer=timer_min; // minutos_cron=0; //?
   segundos_timer=timer_seg+1;
-  while (!(minutos_timer==0 & segundos_timer==0) & func==2){
+  while (!(minutos_timer==0) & (segundos_timer==0) & func==2){
     server.handleClient();
     currentMillis = millis();//Tempo atual em ms
     if (currentMillis - previousMillis > 500){

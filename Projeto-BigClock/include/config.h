@@ -9,12 +9,10 @@
 #include "FastLED.h"
 #include <Ticker.h>
 
-#define SSID_1      "TULIO_1"
+#define SSID_1      "TULIO_2"
 #define PASS_1      "1234567890"
-#define SSID_2      "TULIO_2"
+#define SSID_2      "TULIO_3"
 #define PASS_2      "1234567890"
-#define SSID_3      "2G TULIO"
-#define PASS_3      "1234567890"
 #define UTC         -3  //Fuso horário
 #define LED_PIN     D6
 #define NUM_LEDS    58
@@ -23,6 +21,11 @@
 #define GIRAR_180   //definir para deixar o relógio de cabeça pra baixo
 #define COR_LED     1   //cor default: AZUL (mudar apenas multiplicador com o index de RGB_colors)
 #define BRILHO_LED  200 //brilho dos leds (0-255)
+
+IPAddress local_IP(192, 168, 0, 130); // Set your server's fixed IP address here - definida na função Wifi_config()
+IPAddress gateway(192, 168, 0, 1);    // Set your network Gateway usually your Router base address
+IPAddress subnet(255, 255, 255, 0);   // Set your network sub-network mask here
+IPAddress dns(192, 168, 0, 1);           // Set your network DNS usually your Router base address
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "a.st1.ntp.br", UTC*3600, 60000); //UTC -3:00 Brazil
