@@ -1,6 +1,7 @@
-/********** Big Clock v.1.1 *************
+/********** Big Clock v.1.2 *************
 
 Autor: Túlio Farias
+Funções: Relógio, cronômetro, timer
 https://github.com/tuliovfarias/Big-Clock
 
 ****************************************/
