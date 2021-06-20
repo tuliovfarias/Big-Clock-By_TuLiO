@@ -9,9 +9,9 @@
 #include "FastLED.h"
 #include <Ticker.h>
 
-#define SSID_1      "TULIO_2"
+#define SSID_1      "TULIO_1"
 #define PASS_1      "1234567890"
-#define SSID_2      "TULIO_3"
+#define SSID_2      "TULIO_2"
 #define PASS_2      "1234567890"
 #define UTC         -3  //Fuso horário
 #define LED_PIN     D6
