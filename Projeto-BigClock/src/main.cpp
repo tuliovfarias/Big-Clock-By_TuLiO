@@ -25,27 +25,15 @@ void onTimerISR(){
 ///////////////////////////////////////////////////////////////////////////
 void setup() {
   Serial.begin(9600);
+  Serial.setDebugOutput(true);
   FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.clear();
   FastLED.setBrightness(brilho);
   fill_solid(leds, NUM_LEDS, ColorFromPalette(RGB_colors, index_color));
   FastLED.show();
   
-  WiFi.mode(WIFI_STA);
-  if (!WiFi.config(local_IP, gateway, subnet, dns)) { //WiFi.config(ip, gateway, subnet, dns1, dns2);
-    Serial.println("WiFi config error");
-  } 
-  wifiMulti.addAP(SSID_1, PASS_1);
-  wifiMulti.addAP(SSID_2, PASS_2);
+  config_Wifi();
 
-  Serial.println("Connecting Wifi...");
-  while (wifiMulti.run() != WL_CONNECTED) {
-    delay(200);
-  }
-  
-  Serial.println("WiFi connected to "+WiFi.SSID());
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
   timeClient.begin();
   timeClient.update();
 
@@ -77,6 +65,36 @@ void loop() {
 ////////////////////////////////////////////////////////////////////////////
 //Funções
 ///////////////////////////////////////////////////////////////////////////
+
+void config_Wifi(){
+  Serial.println("Connecting Wifi...");
+  #ifdef WIFI_MULT
+  WiFi.mode(WIFI_STA);
+  if (!WiFi.config(local_IP, gateway, subnet, dns)) { //WiFi.config(ip, gateway, subnet, dns1, dns2);
+    Serial.println("WiFi config error");
+  } 
+  wifiMulti.addAP(SSID_1, PASS_1);
+  wifiMulti.addAP(SSID_2, PASS_2);
+  while (wifiMulti.run() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(200);
+  }
+  #else
+  WiFi.mode(WIFI_STA);
+  WiFi.config(local_IP, gateway, subnet, dns);
+  WiFi.begin(SSID_1, PASS_1);
+  while(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(200);
+  }
+  #endif
+  Serial.println("\nWiFi connected to "+WiFi.SSID());
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+
 void htmlRelogio(){
   func=0;  
   server.send(200, "text/html", RELOGIO_page);
