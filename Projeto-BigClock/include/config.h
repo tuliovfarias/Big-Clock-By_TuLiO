@@ -23,7 +23,7 @@
 #define BRILHO_LED  200 //brilho dos leds (0-255)
 #define WIFI_MULT   //usar MultiWiFi
 
-IPAddress local_IP(192, 168, 0, 23); // Set your server's fixed IP address here - definida na função Wifi_config()
+IPAddress local_IP(192, 168, 0, 130); // Set your server's fixed IP address here - definida na função Wifi_config()
 IPAddress gateway(192, 168, 0, 1);    // Set your network Gateway usually your Router base address
 IPAddress subnet(255, 255, 255, 0);   // Set your network sub-network mask here
 IPAddress dns(8, 8, 8, 8);          // Set your network DNS usually your Router base address
